@@ -5,6 +5,7 @@ OPENLANE DIRECTORY STRUCTURE
 : Desktop/work/tools/openlane_working_dir/openlane$
 <img width="642" alt="DAY1" src="https://github.com/user-attachments/assets/0087a5af-29cc-4eaa-a98e-521d75d887a2" />
 
+
 Docker
 Pre-configured Environment: OpenLane is distributed as a Docker image, meaning all required tools (e.g., tools for synthesis, placement, routing) and dependencies are pre-installed in a self-contained environment.
 
@@ -22,6 +23,7 @@ tcl file : In OpenLane, a TCL file plays a crucial role as it is used to script 
 inside picorv32a:
 Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a
 <img width="640" alt="dated(runs current dirctory)" src="https://github.com/user-attachments/assets/34ce5d11-d865-413a-bfef-70311bb442d8" />
+
 files created on Dec 12-12_14-35
 <img width="640" alt="files that are created currently" src="https://github.com/user-attachments/assets/e5e310c5-688f-439d-b97e-4b8b8777e2b1" />
 
