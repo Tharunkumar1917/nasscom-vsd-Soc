@@ -1,8 +1,18 @@
-<h1># nasscom-vsd-Soc</h1>
+# NASSCOM-VSD-SoC Design and Planning workshop (Dec 11- Dec 24)
 
-<h2>DAY 1  of the Workshop</h2>
-OPENLANE DIRECTORY STRUCTURE
-: Desktop/work/tools/openlane_working_dir/openlane$
+## About the workshop:
+Welcome to the NASCOM SoC Design and Planning Workshop repository! This repository documents my journey through a two-week workshop focused on various aspects of System-on-Chip (SoC) design and planning, including hands-on experience with tools like OpenLane, Magic, and ngSpice.
+
+## DAY 1  of the Workshop
+<details>
+Topics covered:
+           
+</details>
+
+OPENLANE DIRECTORY STRUCTURE : 
+```
+Desktop/work/tools/openlane_working_dir/openlane$
+```
 <img width="642" alt="DAY1" src="https://github.com/user-attachments/assets/0087a5af-29cc-4eaa-a98e-521d75d887a2" />
 
 
