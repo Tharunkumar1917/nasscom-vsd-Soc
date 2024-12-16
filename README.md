@@ -179,7 +179,7 @@ In chip floor planning, preplaced cells refer to specific cells or components th
 
 ![WhatsApp Image 2024-12-16 at 18 13 14_470c051e](https://github.com/user-attachments/assets/4fe84fcb-4d76-4214-8db3-359c535019d7)
 
- __Decouplng Capacitors__
+- __Decouplng Capacitors__
 
   Decoupling capacitors are capacitors placed between the power supply (Vcc) and ground (GND) to smooth out voltage fluctuations and filter noise from the power lines that could affect the performance of sensitive components in the circuit.
   
@@ -189,37 +189,231 @@ Similarly, if there is a voltage spike, the capacitor discharges, absorbing the 
 
 ![WhatsApp Image 2024-12-16 at 18 19 26_944c0359](https://github.com/user-attachments/assets/4b966851-f79d-4fe0-b415-a4d984e9545a)
 
-__Power-Planning__
+- __Power-Planning__
 
 Power planning in chip design refers to the process of designing and organizing the power distribution network within an integrated circuit (IC) or chip. This network ensures that all components on the chip receive the required voltage and current levels to function correctly, efficiently, and reliably.
 
 ![WhatsApp Image 2024-12-16 at 18 29 28_5e322764](https://github.com/user-attachments/assets/f311d9e5-8751-4c38-aab6-374b5b3ab051)
 
-__why do multiple VDD and VSS are used in Floor-planning?__
+ - __why do multiple VDD and VSS are used in Floor-planning?__
 
 VDD and VSS are the primary power and ground connections for the entire chip. As chips grow in size and complexity, a single pair of VDD and VSS lines may not be sufficient to deliver power evenly to all parts of the chip.
 Multiple VDD and VSS lines help distribute power efficiently across the chip, ensuring that all components have stable and reliable access to the voltage they require.
 
 ![WhatsApp Image 2024-12-16 at 18 29 28_64951501](https://github.com/user-attachments/assets/9e762ffa-d0b9-43f4-8e2a-bd48c4671691)
 
- __Pin-Placement__
+ - __Pin-Placement__
 
  Pin placement in chip floor planning refers to the process of determining where the input/output (I/O) pins of an integrated circuit (IC) will be located on the chip's 
  surface. These pins are the electrical contacts through which the chip interacts with the external environment, including other chips, devices, or the power supply.
 
 ![WhatsApp Image 2024-12-16 at 18 30 59_e7cd1815](https://github.com/user-attachments/assets/a762cbf7-4204-4359-8195-0653ace2d510)
 
-![WhatsApp Image 2024-12-16 at 18 35 26_21801004](https://github.com/user-attachments/assets/f0757f92-5d4e-4951-8f3d-f0564c828d67)
+__Logical cell placement blockage__
 
+![WhatsApp Image 2024-12-16 at 18 30 58_16c67481](https://github.com/user-attachments/assets/74fdc244-71df-42ed-a439-fc1c76765999)
+
+
+Types of Pin-Placement
+
+<details>
+           
+__Periphery Pin Placement__
+
+__Central Pin Placement__
+
+__Corner Pin Placement__
+
+__Clustered Pin Placement__
+
+__Power and Ground Pin Placement__
+
+__Symmetric Pin Placement__
 
 </details>
 
 
+- __Placement optimization__
+
+Placement optimization in chip design refers to the process of improving the location of cells (standard cells, macros, or other components) on the chip to achieve specific design goals. These goals typically include maximizing performance, minimizing power consumption, reducing area, and ensuring proper functionality. The placement stage occurs after the logic synthesis and before the routing phase in the chip design flow.
+
+![WhatsApp Image 2024-12-16 at 18 35 39_e761eab9](https://github.com/user-attachments/assets/1c623966-c474-4aad-95ea-6e96d588575c)
 
 
+- __Library__
+
+A library in chip design, specifically in the context of digital IC design, contains a collection of pre-characterized cells that represent standard building blocks for creating circuits. These cells are used to design complex digital systems and include information about their functionality, electrical characteristics, timing behavior, and more.
 
 
+-Based on the information of shapes and size of cells
+-Based on the information of  Delay and STA
+
+![WhatsApp Image 2024-12-16 at 18 37 06_4f6f0ce8](https://github.com/user-attachments/assets/3ffffd78-0d2f-4a7f-aab6-0ae980115649)
+
+- __Library characterisation and Modelling__
+![WhatsApp Image 2024-12-16 at 18 37 05_7bcdd487](https://github.com/user-attachments/assets/508f4daf-665a-4463-94fe-b5d70a08f9c4)
+
+</details>
+
+## Cell design flow
+
+Cell design flow refers to the series of steps or stages involved in the creation of a standard cell for an integrated circuit (IC). Standard cells are the fundamental building blocks used in digital ICs (such as logic gates, flip-flops, multiplexers, etc.), and the design of these cells involves a detailed process that ensures they meet the required performance, area, and power specifications.
+<details>
+Steps in the Cell Design Flow:
+           
+- __Specification and Architecture Definition:__
+
+Functional Specification: Define the desired functionality of the cell (e.g., an AND gate, D flip-flop).
+Performance Goals: Determine the target performance, including timing constraints (e.g., propagation delay, setup time, etc.), power consumption, and area requirements.
+Power Consumption Requirements: Specify the maximum allowable power consumption and leakage currents.
+
+-__Schematic Design:__
+
+Create a schematic diagram of the cell that represents the logical connections between components (transistors, resistors, capacitors, etc.).
+The schematic should accurately reflect the intended functionality of the cell.
+
+-__Transistor Sizing:__
+Choose appropriate sizes for the transistors in the cell based on the required electrical characteristics like drive strength, switching speed, and power consumption.
+Aspect ratio (width to length) of transistors plays a key role in determining the cell's performance and area.
+
+-__Layout Design:__
+
+The schematic is translated into a physical layout, where the actual placement and routing of transistors and other components are defined.
+The layout is optimized for the process node (e.g., 7nm, 14nm) and considers factors like density, congestion, and design rules for the fabrication process.
+
+-__DRC (Design Rule Check):__
+
+Perform a Design Rule Check (DRC) to ensure the layout complies with the manufacturing process’s geometrical constraints (minimum width, spacing, etc.). DRC ensures the design can be fabricated correctly and avoids physical errors like shorts or opens.
+
+-__Extraction and Parasitic Modeling:__
+
+- Extract the parasitic capacitances, resistances, and inductances from the layout.
+Create parasitic models that are used to simulate the behavior of the cell under real-world conditions, accounting for the physical layout's impact on electrical performance.
+Timing and Electrical Analysis:
+
+- Perform timing analysis to determine the delay characteristics (e.g., propagation delay, rise/fall times) of the cell.
+Ensure that the cell meets the required timing constraints (setup time, hold time, and clock skew).
+Power analysis is also done to check for dynamic and static power consumption (including leakage).
+
+-__SPICE Simulation:__
+
+Simulate the cell's electrical behavior using SPICE (Simulation Program with Integrated Circuit Emphasis) to validate the performance, including delay, power, and noise characteristics.
+Ensure the cell works correctly in a range of conditions (e.g., different supply voltages and temperatures).
+
+-__Verification (Functional and Electrical):__
+
+Perform functional verification to ensure that the cell operates as intended in all possible scenarios.
+Conduct electrical verification to ensure the cell meets all the necessary electrical constraints, such as voltage levels, current limits, and power consumption.
+
+-__Cell Characterization:__
+
+Characterize the cell for timing and power, generating libraries of values that can be used in the design flow of higher-level circuit designs.
+Characterization involves running simulations at different process, voltage, and temperature (PVT) corners and compiling delay, power, and noise data.
+
+-__Library Generation:__
+
+After characterization, generate a standard cell library that includes the electrical, timing, and physical data for each cell.
+The library will contain models for various operating conditions and process corners, which are used during the Place and Route (P&R) stages of larger IC designs.
+
+-__Post-Layout Simulation and Signoff:__
+
+Perform post-layout simulations to verify the final layout works as expected with parasitic effects included.
+Ensure the cell meets all design rules, timing requirements, and electrical constraints before the cell is signoff for production.
+
+-__Tapeout:__
+
+Once the cell passes all tests, the final design is sent for tapeout, which is the preparation of the final mask data for the manufacturing process.
+
+![WhatsApp Image 2024-12-16 at 18 37 21_fc9a5357](https://github.com/user-attachments/assets/e69789fd-61bb-4806-8e05-df61db674987)
+</details>
+
+![WhatsApp Image 2024-12-16 at 18 37 25_2cce606b](https://github.com/user-attachments/assets/7b927452-f3ae-44ff-b144-04f0acc81a11)
+
+- __Timing Characterisation__
+
+Timing characterization is the process of determining the delay, setup, hold, and propagation times of a cell or circuit under various operating conditions (such as voltage, temperature, and process variations). It generates timing models that are used in larger chip designs for accurate performance analysis and optimization.
+
+![WhatsApp Image 2024-12-16 at 18 37 28_80d6571f](https://github.com/user-attachments/assets/32755637-20e1-47a4-aaee-fc7e78284311)
+
+- Terms related to Timing Characterisation
+<details>
+           
+__Slew_low_rise_thr:__
+
+The voltage threshold used to determine the start of a rising edge when the signal is transitioning from a low voltage level.
+__Slew_high_rise_thr:__
+The voltage threshold used to determine the end of a rising edge when the signal is transitioning to a high voltage level.
+
+__Slew_low_fall_thr:__
+The voltage threshold used to determine the start of a falling edge when the signal is transitioning from a high voltage level.
+
+__Slew_high_fall_thr:__
+The voltage threshold used to determine the end of a falling edge when the signal is transitioning to a low voltage level.
+
+__in_rise_thr:__
+The voltage threshold used to determine the start of a rising edge at the input of a circuit.
+
+__in_fall_thr:__ 
+The voltage threshold used to determine the start of a falling edge at the input of a circuit.
+
+-__out_rise_thr:__
+The voltage threshold used to determine the start of a rising edge at the output of a circuit.
+
+-__out_fall_thr:__
+The voltage threshold used to determine the start of a falling edge at the output of a circuit.          
+
+![WhatsApp Image 2024-12-16 at 18 37 30_1600b8a4](https://github.com/user-attachments/assets/38ed6dcc-db46-4064-9977-15decb9a5eca)
+</details>
+
+-  __Characterising a cell__
+
+ __Rise Transition__
+ 
+It is the time taken to reach from 20% to 80% of the output rise waveform (logic 0 to 1).
+
+```math
+\text{Rise Transition} = \left( 20\% \text{ of the rise waveform} \right) - \left( 80\% \text{ of the rise waveform} \right)
+
+```
 
 
+__Fall Transition__
 
+It is the time taken to reach from 80% to 20% of the output fall waveform (logic 1 to 0).
 
+```math
+\text{Rise Transition} = \left( 80\% \text{ of the fall waveform} \right) - \left( 20\% \text{ of the fall waveform} \right)
+
+```
+
+__Rise cell dealy__
+
+It is the time difference  between 50% of input voltage and output voltage defined at the 50% of input voltage ,in the output rise waveform.
+
+```math
+\text{Rise cell delay} = \left( 50\% \text{ of the input voltage of rise waveform} \right) - \left( 50\% \text{ of the output voltage of rise waveform} \right)
+
+```
+__Fall cell delay__
+
+It is the time difference  between 50% of input voltage and output voltage defined at the 50% of input voltage, in output fall waveform.
+
+```math
+\text{Rise cell delay} = \left( 50\% \text{ of the input voltage of fall waveform} \right) - \left( 50\% \text{ of the output voltage of fall waveform} \right)
+
+```
+- __Cell area Calculation__
+
+-Die area
+
+```math
+Length\  = \frac{660685 }{1000}
+
+```
+660.85u
+
+```math
+Width\  = \frac{671405 }{1000}
+
+```
+671.405u
