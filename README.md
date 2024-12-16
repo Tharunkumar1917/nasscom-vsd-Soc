@@ -6,6 +6,8 @@ Welcome to the NASCOM SoC Design and Planning Workshop repository! This reposito
 ## DAY 1  of the Workshop
 <details>
 Topics covered:
+Soc
+
            
 </details>
 
@@ -47,10 +49,15 @@ Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-12_17
 yosys stat report 
 <img width="638" alt="yosys stat report" src="https://github.com/user-attachments/assets/2183bf5a-9eae-4b4e-983e-7748a578f9a2" />
 
-FLOP RATIO = NUMBER OF FLIPFLOPS/NUMBER OF CELLS
-           = 1613/14876
-           = 0.108
-
+```math
+Flop\ Ratio = \frac{Number\ of\ D\ Flip\ Flops}{Total\ Number\ of\ Cells}
+```
+- By observing the __yosys stat report__ , it can be noticed that numner of D flip-flops are 1613 and Total number of cells in  the current created folder is 14876, hence flop ratio becomes
+  
+```math
+Flop\ Ratio = \frac{1613}{14876}
+```
+ = 0.1084 or 10.84% 
 
 
 
