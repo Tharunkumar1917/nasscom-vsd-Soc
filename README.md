@@ -366,7 +366,24 @@ The voltage threshold used to determine the start of a falling edge at the outpu
 
 </details>
 
-- __Characterising a cell__
+- __Die area__
+
+```math
+Length\  = \frac{660685 }{1000}
+
+```
+660.85u
+
+```math
+Width\  = \frac{671405 }{1000}
+
+```
+671.405u
+
+<img width="635" alt="def file -Die area" src="https://github.com/user-attachments/assets/79f393f9-e290-4d83-864d-2aa790a85ab7" />
+
+
+__Characterising a cell__
 
  __Rise Transition__
  
@@ -413,58 +430,146 @@ pwd
 ./flow.tcl -interactive
 prep -design picorv32a
 run_synthesis
+run_floorplan
 ```
+
+
 - __README.md__
   
-  The __README.md__ file in OpenLane provides an overview of the project, describing it as an open-source, end-to-end ASIC design flow that integrates tools like Yosys, Magic, and KLayout. It includes instructions for installation, environment setup, and running designs, along with examples to help users get started. Additionally, it covers details about supported platforms, configuration options, contribution guidelines, and licensing.
 
-- To open __readme file__
-  ```
+The __README.md__ file in OpenLane provides an overview of the project, describing it as an open-source, end-to-end ASIC design flow that integrates tools like Yosys, Magic, and KLayout. It includes instructions for installation, environment setup, and running designs, along with examples to help users get started. Additionally, it covers details about supported platforms, configuration options, contribution guidelines, and licensing.
+
+To open __readme.md file__
+  
+```
 cd ~/Desktop/work/tools/openlane_working_dir/openlane
 cd configuration
 ls -ltr
 less readme.md
+
 ```
-  <img width="638" alt="files created on 15_12" src="https://github.com/user-attachments/assets/96990822-2363-4065-a498-3b4451cedd33" />
+  
+ <img width="638" alt="files created on 15_12" src="https://github.com/user-attachments/assets/96990822-2363-4065-a498-3b4451cedd33" />
+ 
+- Before running the floorpan the defaults configurations,  such as core utilization ,default input and output pin placements can be checked 
+  inside the readme.md file
 
-Before running the floorpan the defaults configurations,  such as core utilization ,default input and output pin placements can be checked 
-inside the readme.md file
+ Files created as dated on __15-12_2-07__
 
--  Files created as dated on __15-12_2-07__
-  <img width="638" alt="files created on 15_12" src="https://github.com/user-attachments/assets/a7d47e29-519a-4dfc-a8f4-3695643950d1" />
+ <img width="638" alt="files created on 15_12" src="https://github.com/user-attachments/assets/a7d47e29-519a-4dfc-a8f4-3695643950d1" />
 
- to run floorplan
+ to run floorplan: 
 
 ```
 run_floorplan
 ```
+- In OpenLane, run_floorplan defines the physical layout of the chip by setting the core area, placing IO pins and macros, creating standard cell rows, and adding power straps. It prepares the design for placement and routing in subsequent stages.
+- Another important note is that in openlane  __standard cells__ are not placed in floorplan they are placed after the placement
+  
+  <img width="638" alt="inside floorplan " src="https://github.com/user-attachments/assets/1118c5cd-3bcb-4bf9-a095-cf4c78a763e5" />
 
-- __def.file__
 
-<img width="635" alt="def file -Die area" src="https://github.com/user-attachments/assets/79f393f9-e290-4d83-864d-2aa790a85ab7" />
+__Def file__
 
--  __Cell area Calculation__
+In OpenLane, the __def.file (Design Exchange Format)__ is a critical file containing the physical layout information of an ASIC design. It includes:
 
-- Die area
+<details>
+           
+__Design details:__ Name, units, and grid structure.
 
-```math
-Length\  = \frac{660685 }{1000}
+__Component placement:__ Locations of cells and macros.
+
+__Connections:__ Netlists, pins, and routing guides.
+
+__Special elements:__ Power/ground nets, obstructions, vias.
+
+</details>
+
+The DEF file is used at various stages of the flow, like placement, routing, and layout verification. It serves as both an input and an output for tools in the physical design process.
+  
+
+  to open def file for placement:
+
+  ```
+cd ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/15_12-2_07/results/floorplan
+less picorv32a.floorplan.def
+  ```
+
+<img width="638" alt="inside def file" src="https://github.com/user-attachments/assets/dc8b532d-1701-40fa-b97c-4b2948b72603" />
+
+
+Floorplan tech file location:
 
 ```
-660.85u
-
-```math
-Width\  = \frac{671405 }{1000}
+magic -T /home/nickson/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
 
 ```
-671.405u
-
-<img width="635" alt="def file -Die area" src="https://github.com/user-attachments/assets/79f393f9-e290-4d83-864d-2aa790a85ab7" />
 
 
+__Floorplan layout before the placement of standard cells__
+
+<img width="640" alt="florplan layout" src="https://github.com/user-attachments/assets/86e9eba6-77bb-4e98-b050-a07ca87dcd50" />
+
+In OpenLane, the run_placement step is responsible for placing the standard cells within the design area. Placement is a critical stage in the physical design flow where standard cells are positioned on the chip layout according to the logical netlist while considering design constraints and physical resources.
+
+### Initial global placement ##
+
+Initial Global Placement is the first step in the placement stage of the ASIC physical design flow. It aims to place standard cells within the chip's core area in an approximate manner to minimize wirelength and congestion while keeping the design scalable for further optimization and legalization.
+
+Key Tasks of run_placement
+
+to run placement:
+```
+run_placement
+```
+__Standard Cell Placement__:
+
+The primary function is to place standard cells (small pre-designed logic units like AND, OR, flip-flops) in the specified rows and sites within the core area.
+Ensures cells are aligned properly to the placement grid.
+
+__Initial (Global) Placement:__
+
+The cells are initially placed with the goal of minimizing wirelength and congestion.
+Tools like RePLace (global placement) or OpenROAD's placement engine are used.
+
+__Legalization:__
+
+Adjusts the positions of the standard cells to ensure:
+Cells do not overlap.
+Placement adheres to row boundaries and design rules.
+Cells align to the placement grid.
+
+__Placement Optimization:__
+
+The placement step optimizes the layout for:
+Wirelength minimization.
+Timing and congestion reduction.
+It may also consider power/ground (P/G) grid constraints.
+
+
+Def file for placement
+
+tech file location:
+
+```
+magic -T /home/nickson/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+  
+```
+<img width="641" alt="Global placement_Standard cells placement" src="https://github.com/user-attachments/assets/52c38958-9763-498b-8bef-a787e74d8541" />
+
+
+__Magnified view of placement__
+
+<img width="636" alt="inside placement" src="https://github.com/user-attachments/assets/ea6ba7a2-3b2f-407a-be18-62d83bb8ef61" />
+
+
+__tckon.tcl__
+
+<img width="639" alt="tckon tcl" src="https://github.com/user-attachments/assets/3f89f692-a1ca-4672-9c4b-7bc57e600910" />
 
 
 
+The tckon.tcl file in OpenLane is a TCL script responsible for enabling timing checks and configuration during the design flow. It typically sets up timing constraints, clock definitions, and required timing margins to ensure the design meets performance requirements. This script is executed during key stages like placement, CTS (Clock Tree Synthesis), and routing, enabling tools to analyze and optimize timing.
 
 
 
