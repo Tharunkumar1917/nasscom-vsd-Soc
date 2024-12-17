@@ -573,12 +573,17 @@ The tckon.tcl file in OpenLane is a TCL script responsible for enabling timing c
 ## DAY 3 
 
 Topics covered:
+
 <details>
            
 __Spice simulation for CMOS inverter__
+
 __Steps to git clone vsdstdcelldesign__
+
 __CMOS fabrication process__
+
 __Introduction Mgic tool options and DRC rules__
+
 __Challenges to find incorrect and missing rules__
        
 </details>
