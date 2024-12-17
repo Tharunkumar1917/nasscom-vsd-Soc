@@ -625,32 +625,43 @@ The **16-mask CMOS fabrication process** refers to the use of **16 photolithogra
 
 #### 3. **Key Mask Layers**:
 
-<details>
            
    - **Mask 1-3: Well Formation and Isolation**:
-     - **Mask 1**: Defines the region for **NMOS** and **PMOS** devices, involving ion implantation or diffusion to create **N-well** and **P-well** regions.
-     - **Mask 2-3**: Defines **isolation structures** such as **field oxide** or **shallow trench isolation (STI)**.
+   - **Mask 1**: Defines the region for **NMOS** and **PMOS** devices, involving ion implantation or diffusion to create **N-well** and **P-well** regions.
+   - **Mask 2-3**: Defines **isolation structures** such as **field oxide** or **shallow trench isolation (STI)**.
+   ![WhatsApp Image 2024-12-17 at 17 06 51_a9ebd8a5](https://github.com/user-attachments/assets/e504d9b6-bc59-4fa9-8ba4-aa8b68fe9706)
+   ![WhatsApp Image 2024-12-17 at 17 06 57_3c4d2f6b](https://github.com/user-attachments/assets/f67fa54f-224b-4ceb-83f7-35b5a615ad43)
 
    - **Mask 4-6: Gate Formation**:
      - **Mask 4**: Defines the **polysilicon gate** pattern for the transistors.
      - **Mask 5**: Defines **source/drain implant** for NMOS and PMOS transistors.
      - **Mask 6**: Defines the **oxide spacers** around gates to prevent shorting between source/drain regions.
 
+    ![WhatsApp Image 2024-12-17 at 17 06 59_a8ff5569](https://github.com/user-attachments/assets/a306bb61-a8b8-428c-b8d8-20317398bdb7)
+    ![WhatsApp Image 2024-12-17 at 17 07 01_854aca74](https://github.com/user-attachments/assets/b24a3b8e-a3ef-4e18-b691-d651882a7ab0)
+   
    - **Mask 7-9: Source/Drain and Contacts**:
      - **Mask 7**: Defines the **source and drain regions** via ion implantation.
      - **Mask 8-9**: Defines **contact holes** to connect the transistor’s source, drain, and gate to the first metal layer.
-
+    ![WhatsApp Image 2024-12-17 at 17 07 07_090cfe83](https://github.com/user-attachments/assets/6c931229-4a5b-42c6-a824-4c060605d4f8)
+    ![WhatsApp Image 2024-12-17 at 17 07 10_c02931cb](https://github.com/user-attachments/assets/35a8bbc6-6c14-44a2-87d3-fd8b5165ebfb)
+       
    - **Mask 10-12: Metal Layers and Interconnects**:
      - **Mask 10-12**: Defines the **metal layers** (e.g., metal-1, metal-2, metal-3) for interconnects between various parts of the circuit.
      - These layers are typically made of **aluminum** or **copper** with vias to connect different layers of metal.
+      ![WhatsApp Image 2024-12-17 at 17 07 11_533ebc49](https://github.com/user-attachments/assets/8861a11c-dd05-4dde-b7ac-5149de549cb5)
+      ![WhatsApp Image 2024-12-17 at 17 07 12_c6c35e17](https://github.com/user-attachments/assets/98212a2c-7484-4d80-bf15-dd2972170963)
 
    - **Mask 13-15: Contact via Definition**:
      - These masks define additional **via openings** for inter-layer connectivity, allowing metal layers to connect to the underlying devices.
+      ![WhatsApp Image 2024-12-17 at 17 07 15_89b71af8](https://github.com/user-attachments/assets/7ea89641-2cdf-4302-81a1-28a4bc79db59)
+      ![WhatsApp Image 2024-12-17 at 17 07 18_d5e991b4](https://github.com/user-attachments/assets/9ae592cd-7ac0-4b0b-8d36-bf9aa6c3d033)
 
    - **Mask 16: Final Passivation Layer**:
      - **Mask 16**: Defines the **final passivation layer** (usually **silicon nitride** or **silicon dioxide**) that protects the IC from environmental damage and provides electrical isolation.
+      ![WhatsApp Image 2024-12-17 at 17 07 22_f048ed83](https://github.com/user-attachments/assets/11b755ea-594e-4cb2-addb-b5373db38e8a)
+      ![WhatsApp Image 2024-12-17 at 17 07 23_cd0113b3](https://github.com/user-attachments/assets/78df0f86-110c-48ca-88c7-c20d5cf302be)
 
-</details>
 
 #### 4. **Key Steps in the Fabrication Process**:
    - **Oxidation**: Grow a thin layer of silicon dioxide on the wafer surface.
@@ -664,18 +675,13 @@ The **16-mask CMOS fabrication process** refers to the use of **16 photolithogra
    - **Wafer Testing**: Once fabrication is complete, the wafer undergoes testing to check for defects and verify that the transistors and interconnections are functioning as expected.
    - **Dicing and Packaging**: The wafer is cut into individual **dies**, which are then packaged into IC packages for integration into electronic devices.
 
-
 ```mermaid
-
 flowchart TD
-
-    create Active region -->Formation of Nwell and Pwell
-    Formation of Nwell and Pwell --> Formation of Gate terminal
-    Formation of Gate terminal--> Lightly Doped Drain(LDD) fromation
-    Lightly Doped Drain(LDD) fromation -->Source and Drain formation
-    Source and Drain formation-->Local interconnect formation
-    Local interconnect formation  ---> High level metal formation
-
+    createActiveRegion[Create Active Region] --> FormationOfNwellAndPwell[Formation of Nwell and Pwell]
+    FormationOfNwellAndPwell --> FormationOfGateTerminal[Formation of Gate Terminal]
+    FormationOfGateTerminal --> LightlyDopedDrain[LDD Formation]
+    LightlyDopedDrain --> SourceAndDrainFormation[Source and Drain Formation]
+    SourceAndDrainFormation --> LocalInterconnectFormation[Local Interconnect Formation]
+    LocalInterconnectFormation --> HighLevelMetalFormation[High-Level Metal Formation]
 ```
-
 
