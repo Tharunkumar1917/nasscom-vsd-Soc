@@ -363,6 +363,7 @@ __out_fall_thr:__
 The voltage threshold used to determine the start of a falling edge at the output of a circuit.          
 
 ![WhatsApp Image 2024-12-16 at 18 37 30_1600b8a4](https://github.com/user-attachments/assets/38ed6dcc-db46-4064-9977-15decb9a5eca)
+
 </details>
 
 - __Characterising a cell__
@@ -402,7 +403,47 @@ It is the time difference  between 50% of input voltage and output voltage defin
 \text{Rise cell delay} = \left( 50\% \text{ of the input voltage of fall waveform} \right) - \left( 50\% \text{ of the output voltage of fall waveform} \right)
 
 ```
-- __Cell area Calculation__
+
+### Procedure for Floor Planning
+
+```
+cd ~/Desktop/work/tools/openlane_working_dir/openlane
+docker
+pwd
+./flow.tcl -interactive
+prep -design picorv32a
+run_synthesis
+```
+- __README.md__
+  
+  The __README.md__ file in OpenLane provides an overview of the project, describing it as an open-source, end-to-end ASIC design flow that integrates tools like Yosys, Magic, and KLayout. It includes instructions for installation, environment setup, and running designs, along with examples to help users get started. Additionally, it covers details about supported platforms, configuration options, contribution guidelines, and licensing.
+
+- To open __readme file__
+  ```
+cd ~/Desktop/work/tools/openlane_working_dir/openlane
+cd configuration
+ls -ltr
+less readme.md
+```
+  <img width="638" alt="files created on 15_12" src="https://github.com/user-attachments/assets/96990822-2363-4065-a498-3b4451cedd33" />
+
+Before running the floorpan the defaults configurations,  such as core utilization ,default input and output pin placements can be checked 
+inside the readme.md file
+
+-  Files created as dated on __15-12_2-07__
+  <img width="638" alt="files created on 15_12" src="https://github.com/user-attachments/assets/a7d47e29-519a-4dfc-a8f4-3695643950d1" />
+
+ to run floorplan
+
+```
+run_floorplan
+```
+
+- __def.file__
+
+<img width="635" alt="def file -Die area" src="https://github.com/user-attachments/assets/79f393f9-e290-4d83-864d-2aa790a85ab7" />
+
+-  __Cell area Calculation__
 
 - Die area
 
@@ -417,3 +458,15 @@ Width\  = \frac{671405 }{1000}
 
 ```
 671.405u
+
+<img width="635" alt="def file -Die area" src="https://github.com/user-attachments/assets/79f393f9-e290-4d83-864d-2aa790a85ab7" />
+
+
+
+
+
+
+
+
+
+
