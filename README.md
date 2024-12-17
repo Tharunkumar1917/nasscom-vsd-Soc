@@ -567,11 +567,17 @@ __tckon.tcl__
 
 <img width="639" alt="tckon tcl" src="https://github.com/user-attachments/assets/3f89f692-a1ca-4672-9c4b-7bc57e600910" />
 
-
-
 The tckon.tcl file in OpenLane is a TCL script responsible for enabling timing checks and configuration during the design flow. It typically sets up timing constraints, clock definitions, and required timing margins to ensure the design meets performance requirements. This script is executed during key stages like placement, CTS (Clock Tree Synthesis), and routing, enabling tools to analyze and optimize timing.
 
 
+## DAY 3 ##
+
+Topics covered:
+<details>
+
+
+           
+</details>
 
 
 
