@@ -582,7 +582,7 @@ __Steps to git clone vsdstdcelldesign__
 
 __CMOS fabrication process__
 
-__Introduction Mgic tool options and DRC rules__
+__Introduction Magic tool options and DRC rules__
 
 __Challenges to find incorrect and missing rules__
        
@@ -689,3 +689,118 @@ flowchart TD
     LocalInterconnectFormation --> HighLevelMetalFormation[High-Level Metal Formation]
 ```
 
+__How to clone github repo to openlane ?__
+
+use the below command:
+
+```
+cd ~/Desktop/work/tools/openlane_working_dir/openlane
+git clone  https:// github.com/nickson-jose/vsdstdcelldesign.git
+```
+<img width="640" alt="github clone" src="https://github.com/user-attachments/assets/c6ef90ad-4a41-47f4-b55b-6cbf5fd9daae" />
+
+__Extracting sky130A tech file from pdks and including it inside vsdstdcelldesign__
+
+```
+cd ~/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic
+cp sky130A.tech /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+
+```
+
+<img width="640" alt="cmd to include sky130A inside vsdstd" src="https://github.com/user-attachments/assets/83d16dee-f17f-427b-a0c2-18e14eee7e8f" />
+
+
+__check whether sky130A tech is included in the vsdstdcell design__
+
+```
+cd ~/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+ls -ltr
+
+```
+<img width="638" alt="include sky130a tech inside vsdstdcelldesign" src="https://github.com/user-attachments/assets/c1c63913-e5e2-439e-bd21-6d713b9057df" />
+
+__command to open inverter layout__
+
+```
+cd ~/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+magic -T sky130A.tech sky130_inv.mag & 
+```
+
+<img width="640" alt="Date and time of opening inv" src="https://github.com/user-attachments/assets/1cc70905-6dfd-4843-81de-110b3b008ba6" />
+
+### INVERTER LAYOUT ##
+
+<img width="638" alt="nmos" src="https://github.com/user-attachments/assets/8377e5b5-f4e1-4715-962a-9e64fdc37cc2" />
+
+__Extracting inverter file layout to SPICE deck__
+
+enter the beow command in tckon window
+```
+pwd
+extract all
+ext2spice cthresh 0 rethresh 0
+ext2spice
+```
+<img width="641" alt="ext2spice" src="https://github.com/user-attachments/assets/474b0a37-de33-40a5-97fa-a97dda0ca17b" />
+
+__After extraction a file can be seen named as sky130_inv.spice inside vsdstdcelldesign folder__
+
+<img width="638" alt="check ext2spice" src="https://github.com/user-attachments/assets/8dbef30d-1423-4397-98f0-6e236b2dc77d" />
+
+__To set the parameters that are necessary to simulate the inverter__
+
+ ```
+cd ~/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+vim   sky130_inv.spice                               
+```
+
+<img width="957" alt="editable spice file for spice inv" src="https://github.com/user-attachments/assets/b04a725d-ef52-408e-ad8f-41875ee7faa1" />
+
+__use the below command to simulate the inverter from sky130_inv.spice file__
+
+```
+cd ~/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+ng spice sky130_inv.spice
+```
+<img width="800" alt="ngspice opentool for simulating inv" src="https://github.com/user-attachments/assets/d0d35406-81d1-4c95-a009-71ed7515215a" />
+
+### Transient response of an Inverter ###
+<img width="919" alt="TRANSINT RESPONSE" src="https://github.com/user-attachments/assets/c7ce9e6c-723c-4d8a-9475-1343e44abcde" />
+
+- __Calculation of rise delay and fall delay__
+
+__Rise cell delay__
+
+It is the time difference  between 50% of input voltage and output voltage defined at the 50% of input voltage ,in the output rise waveform.
+
+__Fall cell delay__
+
+It is the time difference  between 50% of input voltage and output voltage defined at the 50% of input voltage, in output fall waveform.
+
+50% of 3.3V is 1.65v
+
+__Rise cell dealy__
+
+```math
+\text{Rise cell delay} = \left( \text{ 2.18n} \right) - \left(  \text{2.14n} \right)
+```
+0.04ns 
+
+__Fall cell delay__
+
+```math
+\text{Rise cell delay} = \left(\text{2.20n} \right) - \left( \text{ 2.12n} \right)
+```
+0.08ns 
+
+__Coordinates of rise and fall delay__
+<img width="959" alt="COORDINATES for rise and fall delay" src="https://github.com/user-attachments/assets/e0a2b162-7f17-40f7-ad26-46dcd59aaca9" />
+
+
+
+## DAY 4 ##
+
+TOPICS COVERED 
+<DETAILS>
+           
+</DETAILS>
