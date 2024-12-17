@@ -570,14 +570,112 @@ __tckon.tcl__
 The tckon.tcl file in OpenLane is a TCL script responsible for enabling timing checks and configuration during the design flow. It typically sets up timing constraints, clock definitions, and required timing margins to ensure the design meets performance requirements. This script is executed during key stages like placement, CTS (Clock Tree Synthesis), and routing, enabling tools to analyze and optimize timing.
 
 
-## DAY 3 ##
+## DAY 3 
 
 Topics covered:
 <details>
-
-
            
+__Spice simulation for CMOS inverter__
+__Steps to git clone vsdstdcelldesign__
+__CMOS fabrication process__
+__Introduction Mgic tool options and DRC rules__
+__Challenges to find incorrect and missing rules__
+       
 </details>
 
+### SPICE DECK ###
+
+A SPICE deck in OpenLane is a simulation file that describes the electrical characteristics and interconnections of the design at the transistor level, enabling the verification of timing, power, and functionality through simulation. It is a crucial part of ensuring that the final design performs correctly under real-world conditions.
+
+steps to set the simulation parameters in spice deck
+- Identify the nodes such as  __Drain ,Source ,Substrate__.
+- Name the selected nodes such as __out ,in ,0__.
+- Set the supply voltage such as  __VPULSE__, __VDD__.
+  
+![WhatsApp Image 2024-12-17 at 17 06 31_093daa51](https://github.com/user-attachments/assets/eaf6cd94-7bcf-4f20-8689-462845e52f4a)
+
+### Variation in VTC a Inverter due to different ratios of \( W/L \) for NMOS and PMOS ###
+### Effect of \( W/L \) Ratios on Inverter VTC
+
+1. **Balance between NMOS and PMOS**: The \( W/L \) ratio for PMOS is typically **larger** than NMOS to compensate for the lower hole mobility in PMOS, ensuring balanced switching characteristics.
+
+2. **VTC Symmetry**: When **NMOS and PMOS** have similar \( W/L \) ratios, the **VTC** is symmetric, with sharp transitions between logic 0 and 1, leading to ideal voltage levels.
+
+3. **Improved Switching Speed**: A **larger \( W/L \) ratio for PMOS** allows the inverter to **pull up** the output faster, resulting in **faster switching** and sharper voltage transitions.
+
+4. **Noise Margins**: Proper sizing of NMOS and PMOS provides **stronger noise margins**, making the inverter more resistant to noise and voltage fluctuations at the input.
+
+5. **Degraded Performance with Poor Sizing**: If the PMOS \( W/L \) ratio is too **small** compared to NMOS, the inverter will have **slower rise times**, a **gradual VTC**, reduced noise margins, and slower switching performance.
+
+
+![WhatsApp Image 2024-12-17 at 17 06 49_e322ad9c](https://github.com/user-attachments/assets/2b537db3-f1a0-4989-996f-62562114e9b6)
+
+### CMOS FABRICATION PROCESS 
+
+### 16-Mask CMOS Fabrication Process
+
+The **16-mask CMOS fabrication process** refers to the use of **16 photolithography masks** to fabricate an integrated circuit (IC) on a semiconductor wafer. The process includes multiple steps to create the various layers of the circuit, such as **transistor structures (NMOS, PMOS)**, **interconnects**, and **metal layers**.
+
+#### 1. **Wafer Preparation**:
+   - **Starting material**: The process begins with a **silicon wafer** (typically 200mm or 300mm), which is cleaned and prepared for the deposition of materials.
+   - **Oxide Layer**: A thin layer of **silicon dioxide (SiO₂)** is grown on the wafer’s surface through **thermal oxidation**, acting as an insulating layer for the transistor gate.
+
+#### 2. **Masking and Lithography**:
+   - The primary technique used for patterning the wafer is **photolithography**, which employs **16 separate masks**. Each mask defines a different part of the IC, such as transistors, interconnections, and contact openings.
+
+#### 3. **Key Mask Layers**:
+
+<details>
+           
+   - **Mask 1-3: Well Formation and Isolation**:
+     - **Mask 1**: Defines the region for **NMOS** and **PMOS** devices, involving ion implantation or diffusion to create **N-well** and **P-well** regions.
+     - **Mask 2-3**: Defines **isolation structures** such as **field oxide** or **shallow trench isolation (STI)**.
+
+   - **Mask 4-6: Gate Formation**:
+     - **Mask 4**: Defines the **polysilicon gate** pattern for the transistors.
+     - **Mask 5**: Defines **source/drain implant** for NMOS and PMOS transistors.
+     - **Mask 6**: Defines the **oxide spacers** around gates to prevent shorting between source/drain regions.
+
+   - **Mask 7-9: Source/Drain and Contacts**:
+     - **Mask 7**: Defines the **source and drain regions** via ion implantation.
+     - **Mask 8-9**: Defines **contact holes** to connect the transistor’s source, drain, and gate to the first metal layer.
+
+   - **Mask 10-12: Metal Layers and Interconnects**:
+     - **Mask 10-12**: Defines the **metal layers** (e.g., metal-1, metal-2, metal-3) for interconnects between various parts of the circuit.
+     - These layers are typically made of **aluminum** or **copper** with vias to connect different layers of metal.
+
+   - **Mask 13-15: Contact via Definition**:
+     - These masks define additional **via openings** for inter-layer connectivity, allowing metal layers to connect to the underlying devices.
+
+   - **Mask 16: Final Passivation Layer**:
+     - **Mask 16**: Defines the **final passivation layer** (usually **silicon nitride** or **silicon dioxide**) that protects the IC from environmental damage and provides electrical isolation.
+
+</details>
+
+#### 4. **Key Steps in the Fabrication Process**:
+   - **Oxidation**: Grow a thin layer of silicon dioxide on the wafer surface.
+   - **Deposition**: Deposit materials like **polysilicon** and **metals** using **chemical vapor deposition (CVD)** or **physical vapor deposition (PVD)**.
+   - **Photolithography**: Use photomasks to pattern the layers onto the wafer using photoresist, UV light, and development.
+   - **Etching**: Remove unwanted materials through **dry etching** or **wet etching**.
+   - **Ion Implantation**: Introduce dopants into specific wafer regions to create **NMOS** and **PMOS** regions.
+   - **Chemical Mechanical Planarization (CMP)**: Polish the wafer surface to flatten it after deposition and etching.
+
+#### 5. **Final Steps**:
+   - **Wafer Testing**: Once fabrication is complete, the wafer undergoes testing to check for defects and verify that the transistors and interconnections are functioning as expected.
+   - **Dicing and Packaging**: The wafer is cut into individual **dies**, which are then packaged into IC packages for integration into electronic devices.
+
+
+```mermaid
+
+flowchart TD
+
+    create Active region -->Formation of Nwell and Pwell
+    Formation of Nwell and Pwell --> Formation of Gate terminal
+    Formation of Gate terminal--> Lightly Doped Drain(LDD) fromation
+    Lightly Doped Drain(LDD) fromation -->Source and Drain formation
+    Source and Drain formation-->Local interconnect formation
+    Local interconnect formation  ---> High level metal formation
+
+```
 
 
