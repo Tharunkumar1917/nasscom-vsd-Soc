@@ -339,8 +339,8 @@ Timing characterization is the process of determining the delay, setup, hold, an
 <details>
            
 __Slew_low_rise_thr:__
-
 The voltage threshold used to determine the start of a rising edge when the signal is transitioning from a low voltage level.
+
 __Slew_high_rise_thr:__
 The voltage threshold used to determine the end of a rising edge when the signal is transitioning to a high voltage level.
 
@@ -356,16 +356,16 @@ The voltage threshold used to determine the start of a rising edge at the input 
 __in_fall_thr:__ 
 The voltage threshold used to determine the start of a falling edge at the input of a circuit.
 
--__out_rise_thr:__
+__out_rise_thr:__
 The voltage threshold used to determine the start of a rising edge at the output of a circuit.
 
--__out_fall_thr:__
+__out_fall_thr:__
 The voltage threshold used to determine the start of a falling edge at the output of a circuit.          
 
 ![WhatsApp Image 2024-12-16 at 18 37 30_1600b8a4](https://github.com/user-attachments/assets/38ed6dcc-db46-4064-9977-15decb9a5eca)
 </details>
 
--  __Characterising a cell__
+- __Characterising a cell__
 
  __Rise Transition__
  
@@ -404,7 +404,7 @@ It is the time difference  between 50% of input voltage and output voltage defin
 ```
 - __Cell area Calculation__
 
--Die area
+- Die area
 
 ```math
 Length\  = \frac{660685 }{1000}
