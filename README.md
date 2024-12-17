@@ -627,8 +627,8 @@ The **16-mask CMOS fabrication process** refers to the use of **16 photolithogra
 
            
    - **Mask 1-3: Well Formation and Isolation**:
-   - **Mask 1**: Defines the region for **NMOS** and **PMOS** devices, involving ion implantation or diffusion to create **N-well** and **P-well** regions.
-   - **Mask 2-3**: Defines **isolation structures** such as **field oxide** or **shallow trench isolation (STI)**.
+     - **Mask 1**: Defines the region for **NMOS** and **PMOS** devices, involving ion implantation or diffusion to create **N-well** and **P-well** regions.
+     - **Mask 2-3**: Defines **isolation structures** such as **field oxide** or **shallow trench isolation (STI)**.
    ![WhatsApp Image 2024-12-17 at 17 06 51_a9ebd8a5](https://github.com/user-attachments/assets/e504d9b6-bc59-4fa9-8ba4-aa8b68fe9706)
    ![WhatsApp Image 2024-12-17 at 17 06 57_3c4d2f6b](https://github.com/user-attachments/assets/f67fa54f-224b-4ceb-83f7-35b5a615ad43)
 
@@ -636,7 +636,6 @@ The **16-mask CMOS fabrication process** refers to the use of **16 photolithogra
      - **Mask 4**: Defines the **polysilicon gate** pattern for the transistors.
      - **Mask 5**: Defines **source/drain implant** for NMOS and PMOS transistors.
      - **Mask 6**: Defines the **oxide spacers** around gates to prevent shorting between source/drain regions.
-
     ![WhatsApp Image 2024-12-17 at 17 06 59_a8ff5569](https://github.com/user-attachments/assets/a306bb61-a8b8-428c-b8d8-20317398bdb7)
     ![WhatsApp Image 2024-12-17 at 17 07 01_854aca74](https://github.com/user-attachments/assets/b24a3b8e-a3ef-4e18-b691-d651882a7ab0)
    
