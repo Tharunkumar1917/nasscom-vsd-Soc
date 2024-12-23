@@ -996,7 +996,7 @@ __Finally our vsdinv has been included inside picorv32a__
    - Account for process, voltage, and temperature (PVT) variations.
    - Optimize across different operating modes and corners.
 
-## Delay Tables in VLSI
+### Delay Tables in VLSI ###
 **Delay Tables** provide timing information for standard cells under various conditions of load and input transition. They are essential for accurate timing analysis and optimization during the design process.
 
 ### Components of Delay Tables
@@ -1269,7 +1269,7 @@ Here are three typical DRC checks:
 
 - Wire Width Check: Ensures wire traces are wide enough to prevent issues like increased resistance or wire breakage. (e.g., minimum width of 0.5 microns).
 - Wire Pitch Check: Ensures adequate spacing between adjacent wires to prevent short circuits or crosstalk. (e.g., minimum spacing of 0.2 microns).
--Wire Spacing Check: Ensures the center-to-center distance between wires meets the minimum required for manufacturability and proper layer alignment. (e.g., minimum pitch of 0.6 microns).
+- Wire Spacing Check: Ensures the center-to-center distance between wires meets the minimum required for manufacturability and proper layer alignment. (e.g., minimum pitch of 0.6 microns).
 
 ![WhatsApp Image 2024-12-23 at 09 14 25_551b68c4](https://github.com/user-attachments/assets/e7290d5d-cd29-4cdb-9cc0-548f5150dfc3)
 
@@ -1281,7 +1281,7 @@ A Signal Short DRC violation occurs when two or more signal lines or nets that s
 
 Two Additional DRC Rules to Check
 
--__Via Width Check (Minimum Via Width):__
+__Via Width Check (Minimum Via Width):__
 
 __Definition:__ This rule ensures that the vias used to connect different metal layers in the design have a sufficient width to handle the required current and maintain structural integrity during manufacturing.
 
@@ -1290,7 +1290,7 @@ __Example DRC Rule:__ Minimum via width could be defined as 0.3 microns. Any via
 
 ![WhatsApp Image 2024-12-23 at 09 14 27_2922d036](https://github.com/user-attachments/assets/5f1705e9-5cb8-4e7b-8ca1-8a544af9157f)
 
--__Via Spacing Check (Minimum Via Spacing):__
+__Via Spacing Check (Minimum Via Spacing):__
 
 __Definition:__ This rule checks that there is enough distance between the centers of adjacent vias to avoid potential short circuits or interference between vias.
 
