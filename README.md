@@ -801,6 +801,179 @@ __Coordinates of rise and fall delay__
 ## DAY 4 ##
 
 TOPICS COVERED 
+
 <DETAILS>
-           
+   
+-__Prelayout timing analysis and importance of good clock tree__
+    
+-__steps convert grid info to track info__
+   
+-__steps to convert standard layout to cell lef__
+   
+-__Introduction clock jitter and uncertainity__       
+    
+-__Setup and Holdtime time analysis usingb real clocks__
+    
 </DETAILS>
+
+ __trcaks.info__
+
+The tracks.info file in OpenLane defines routing tracks for each metal layer, specifying the layer name, routing direction (horizontal/vertical), track pitch, and offset. It is used to configure the routing grid and ensure adherence to design rules. This file is essential for efficient and rule-compliant placement and routing in physical design.
+
+
+to open tracks.info
+```
+cd ~/Desktop/work/tools/openlane_working_dir/openlane/sky130_fd_cs_hd
+less tracks.info
+```
+
+  <img width="958" alt="tracks info" src="https://github.com/user-attachments/assets/53bb2984-ded0-4964-8e8d-8d0959b5bc9f" />
+
+### Steps to insert Inverter from vsdstdcelldesign to picorv32a src file ###
+
+__How to open layout in vsdstdcelldesign ?__
+
+```
+cd ~/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+magic -T sky130A.tech sky130_inv.mag &
+```
+
+<img width="953" alt="layout opening" src="https://github.com/user-attachments/assets/c1f8f38c-d362-4509-a486-3cc6c3d21798" />
+
+- Press G fir the activation of grid
+- Change the grid parameters as the info from tracks file in tkcn window
+
+ ```
+  grid 0.46um 0.34um 0.23um 0.17um
+  save sky130_vsdinv.mag
+  exit
+ ```
+
+<img width="960" alt="changing grid" src="https://github.com/user-attachments/assets/2823627c-f12f-4341-af7f-9eedac3624b5" />
+
+- after saving sky130_vsdinv.mag inside vsdstdcelldesign and commands to open that file
+
+  ```
+  cd ~/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+  magic -T sky130A.tech sky130_vsdinv.mag &
+  ```
+
+ <img width="960" alt="after saving changed grid of the  inverter in vsdstd" src="https://github.com/user-attachments/assets/b185f470-b855-4614-8be6-6554c6dd3f4b" /
+
+ - Extracting lef file for the inverter
+
+   command to be written in tkcon window:
+   ```
+   lef write
+   ```
+- lef file inside vsdstdcelldesign
+   <img width="958" alt="lef file" src="https://github.com/user-attachments/assets/d66bfb6f-27e9-48da-9a8d-3d7592c297d1" />
+
+ __Copying of lef file from vsdstdcelldesign to src file of picorv32a__
+
+ command to be used:
+
+ tech file location of src:
+ 
+ ```
+ /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src
+ cd ~/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+cp sky130_vsdinv.lef /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src
+```
+
+<img width="960" alt="lef file is copied from vsdstdcelldesign to picorv32a src" src="https://github.com/user-attachments/assets/13c2f123-6d00-4feb-856c-5aeb28246065" />
+
+- checking the validation of leffile inside src
+
+<img width="959" alt="lef file is in picorv32a" src="https://github.com/user-attachments/assets/ee200551-43b1-4490-8988-ad3ecb8c0808" />
+
+ __Copying library files from vsdstdcelldeign to picorv32a__
+
+ lib files location:
+
+ ```
+ cd ~/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign/libs
+ls -ltr
+```
+
+copy lib files to techfile :
+
+```
+cp sky130_fd_sc_hd* /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src
+```
+
+<img width="960" alt="copy lib fast slow to src" src="https://github.com/user-attachments/assets/dcef02d0-3edb-43b1-b2cc-d429b8d4f59e" />
+
+lib files inside src:
+<img width="956" alt="directory checking" src="https://github.com/user-attachments/assets/3826254c-0705-43e0-b9dc-bd95026cf35f" />
+
+update the congiguration file (__config.tcl__) as per the given commands after including lib files inside src file
+to open config.tcl:
+
+```
+vim config.tcl
+```
+<img width="960" alt="vim config location" src="https://github.com/user-attachments/assets/82d38b2f-7a09-405f-bac1-f7b98839c64c" />
+
+- updated config.tcl
+
+insert below command in config.tcl:
+
+```
+set ::env(LIB_SYNTH) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+set ::env(LIB_FASTEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__fast.lib"
+set ::env(LIB_SLOWEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__slow.lib"
+set ::env(LIB_TYPICAL) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+
+set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/src/*.lef]
+```
+
+<img width="959" alt="vim update config tcl" src="https://github.com/user-attachments/assets/bca30e56-eb13-40f0-a5a8-1f3f30b1fbf7" />
+
+__vsd.inv file is included in picorv32a__
+
+<img width="959" alt="vsdinv inverter is included in picorv" src="https://github.com/user-attachments/assets/4085e35f-6684-4b47-9dcf-7e9bb3e7e574" />
+
+__Steps to run floorplan in docker__
+
+```
+docker
+pwd
+./flow.tcl -interactive
+
+prp -design picorv32a 
+````
+-  Include the below command to include the additional lef into the flow  before running __synthesis__ :
+
+```
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+  
+add_lefs -src $lefs
+```
+<img width="959" alt="after adding 2 commands in docker of config tcl" src="https://github.com/user-attachments/assets/1ff40466-c034-4ac5-b1f6-c946fc95e04c" />
+
+- after successful synthesis without any __slack__ violation
+
+  run floorplan:
+  ```
+  run_synthesis
+  run_floorplan
+  ```
+<img width="960" alt="successful synthesis after changing commands" src="https://github.com/user-attachments/assets/444f7a62-8c10-4c78-a5f6-2eafeaa280d1" />
+
+Root directory to open synthesized file on __19-12-14-35__:
+
+```
+ cd ~/Desktop/work/tools/openlane_working_dir/openlane/design/picorv32a/runs/19-12-14-35/results/placement
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def
+
+```
+
+<img width="960" alt="root directory for vsdinv" src="https://github.com/user-attachments/assets/3a3cc9e5-7380-46e1-b243-3dfe588e4172" />
+
+
+__Finally our vsdinv has been included inside picorv32a__
+
+<img width="959" alt="vsdinv is included inside the picorv32a" src="https://github.com/user-attachments/assets/794b6e40-6af8-4336-9fb7-76c98b04d082" />
+<img width="960" alt="vsdinv" src="https://github.com/user-attachments/assets/f5919e00-8dd3-42d0-bb94-8e770b1a8155" />
+
