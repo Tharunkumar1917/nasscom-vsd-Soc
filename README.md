@@ -1267,10 +1267,8 @@ Design Rule Check (DRC) ensures a circuit layout meets manufacturing constraints
 
 Here are three typical DRC checks:
 
--Wire Width Check: Ensures wire traces are wide enough to prevent issues like increased resistance or wire breakage. (e.g., minimum width of 0.5 microns).
-
--Wire Pitch Check: Ensures adequate spacing between adjacent wires to prevent short circuits or crosstalk. (e.g., minimum spacing of 0.2 microns).
-
+- Wire Width Check: Ensures wire traces are wide enough to prevent issues like increased resistance or wire breakage. (e.g., minimum width of 0.5 microns).
+- Wire Pitch Check: Ensures adequate spacing between adjacent wires to prevent short circuits or crosstalk. (e.g., minimum spacing of 0.2 microns).
 -Wire Spacing Check: Ensures the center-to-center distance between wires meets the minimum required for manufacturability and proper layer alignment. (e.g., minimum pitch of 0.6 microns).
 
 ![WhatsApp Image 2024-12-23 at 09 14 25_551b68c4](https://github.com/user-attachments/assets/e7290d5d-cd29-4cdb-9cc0-548f5150dfc3)
@@ -1312,20 +1310,20 @@ __What are Preprocessor route guides ?__
 
 Preprocessor Route Guides are a set of predefined guidelines or paths used during the routing process in IC (Integrated Circuit) design to influence and optimize the routing of signals between various components on the chip. These guides help to direct the router tool (like TritonRoute) in a way that can improve the routing process by reducing congestion, ensuring efficient use of routing resources, and adhering to design rules.
 
--Avoiding Congestion: Steering routes away from crowded areas.
--Optimizing Wire Length: Reducing signal path lengths for better performance.
--Ensuring Design Rule Compliance: Following spacing, width, and layer requirements.
--Simplifying Routing: Making complex routing tasks faster and easier.
+- Avoiding Congestion: Steering routes away from crowded areas.
+- Optimizing Wire Length: Reducing signal path lengths for better performance.
+- Ensuring Design Rule Compliance: Following spacing, width, and layer requirements.
+- Simplifying Routing: Making complex routing tasks faster and easier.
 
 ![WhatsApp Image 2024-12-23 at 09 14 28_f9605cad](https://github.com/user-attachments/assets/6759142a-cc56-4979-805e-05fd26c21479)
 
 __Intralayer parallel and Interlayer sequential panel routing__
 
--Intralayer Parallel Routing
+__Intralayer Parallel Routing__
 - Routes multiple signals in parallel within a single metal layer.
 - Requires careful spacing to avoid crosstalk or shorts.
 
--Interlayer Sequential Routing
+ __Interlayer Sequential Routing__
 - Routes signals across multiple metal layers using vias.
 - Provides more flexibility but increases complexity.
 
