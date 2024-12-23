@@ -977,3 +977,10 @@ __Finally our vsdinv has been included inside picorv32a__
 <img width="959" alt="vsdinv is included inside the picorv32a" src="https://github.com/user-attachments/assets/794b6e40-6af8-4336-9fb7-76c98b04d082" />
 <img width="960" alt="vsdinv" src="https://github.com/user-attachments/assets/f5919e00-8dd3-42d0-bb94-8e770b1a8155" />
 
+### Power aware CTS(C lock Tree Synthesis) and Delay tables
+
+
+
+![WhatsApp Image 2024-12-23 at 08 39 07_aaa04b85](https://github.com/user-attachments/assets/49550ec7-90d0-46a4-947b-5bb5b9b3d474)
+
+
