@@ -1100,29 +1100,29 @@ __Effects of Glitches__
   
 __Cross-Talk Delta delay-Skew__
 
-## 1. Cross-Talk
+ ### Cross-Talk ###
 Cross-talk is the unwanted electromagnetic coupling between adjacent signal wires in a VLSI circuit. It occurs when the signal in one wire (the **aggressor**) induces noise or interference in a nearby wire (the **victim**).
 
-### Causes of Cross-Talk
+ __Causes of Cross-Talk__
 - **Capacitive Coupling**: Charge transfer between adjacent wires due to their parasitic capacitance.
 - **Inductive Coupling**: Induced currents due to changing magnetic fields in adjacent wires.
 
-### Effects of Cross-Talk
+__Effects of Cross-Talk__
 - **Noise**: Unintended signal glitches on the victim wire.
 - **Delta Delay**: Changes in signal propagation time due to interference (explained below).
 - **Signal Integrity Issues**: Potential functional failures if noise exceeds threshold levels.
 
-### Mitigation Techniques
+__Mitigation Techniques__
 - Increase spacing between wires.
 - Use shielding layers or guard rings.
 - Optimize routing to minimize coupling capacitance.
 
 ---
 
-## 2. Delta Delay
+ ### Delta Delay ###
 Delta delay refers to the change in signal propagation delay caused by cross-talk effects. It can either speed up or slow down a signal depending on the relative switching behavior of the aggressor and victim wires.
 
-### Types of Delta Delay
+__Types of Delta Delay__
 1. **Positive Delta Delay**:
    - Occurs when the aggressor and victim signals switch in the **same direction**.
    - Results in a **reduction** in propagation delay (signal arrives earlier than expected).
@@ -1131,21 +1131,21 @@ Delta delay refers to the change in signal propagation delay caused by cross-tal
    - Occurs when the aggressor and victim signals switch in **opposite directions**.
    - Results in an **increase** in propagation delay (signal arrives later than expected).
 
-### Implications of Delta Delay
+__Implications of Delta Delay__
 - Can cause **timing violations**, such as setup or hold failures.
 - Affects critical paths and degrades overall circuit performance.
 
-### Mitigation Techniques
+__Mitigation Techniques__
 - Reduce coupling capacitance by increasing spacing.
 - Perform **cross-talk aware timing analysis** during design.
 - Use buffers or repeaters to isolate aggressor and victim signals.
 
 ---
 
-## 3. Skew
+  ### Skew ###
 Skew is the difference in arrival times of the clock or signal edges at different points in a circuit.
 
-### Types of Skew
+__Types of Skew__
 1. **Clock Skew**:
    - Difference in arrival times of the clock signal at different clocked elements (e.g., flip-flops).
    - **Positive Skew**: Clock arrives earlier at the source flip-flop than the destination flip-flop.
@@ -1154,21 +1154,21 @@ Skew is the difference in arrival times of the clock or signal edges at differen
 2. **Data Skew**:
    - Variation in arrival times of data signals due to path differences or cross-talk effects.
 
-### Implications of Skew
+__Implications of Skew__
 - **Clock Skew**:
   - Can cause **setup violations** (negative skew) or **hold violations** (positive skew).
   - Affects synchronous design performance and timing closure.
 - **Data Skew**:
   - Leads to mismatched data arrival at logic inputs, causing functional errors.
 
-### Mitigation Techniques
+__Mitigation Techniques__
 - Use balanced clock trees to minimize clock skew (e.g., H-tree or mesh topology).
 - Equalize data path delays using delay buffers.
 - Perform **skew-aware timing analysis** during physical design.
 
 ---
 
-## Conclusion
+### Conclusion ###
 - **Cross-talk** introduces noise and affects signal integrity.
 - **Delta delay** results from cross-talk and alters signal propagation times.
 - **Skew** impacts timing synchronization and circuit functionality.
@@ -1321,11 +1321,11 @@ Preprocessor Route Guides are a set of predefined guidelines or paths used durin
 
 __Intralayer parallel and Interlayer sequential panel routing__
 
-### Intralayer Parallel Routing
+-Intralayer Parallel Routing
 - Routes multiple signals in parallel within a single metal layer.
 - Requires careful spacing to avoid crosstalk or shorts.
 
-### Interlayer Sequential Routing
+-Interlayer Sequential Routing
 - Routes signals across multiple metal layers using vias.
 - Provides more flexibility but increases complexity.
 
