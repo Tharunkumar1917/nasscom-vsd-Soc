@@ -977,10 +977,104 @@ __Finally our vsdinv has been included inside picorv32a__
 <img width="959" alt="vsdinv is included inside the picorv32a" src="https://github.com/user-attachments/assets/794b6e40-6af8-4336-9fb7-76c98b04d082" />
 <img width="960" alt="vsdinv" src="https://github.com/user-attachments/assets/f5919e00-8dd3-42d0-bb94-8e770b1a8155" />
 
-### Power aware CTS(C lock Tree Synthesis) and Delay tables
 
+### Power aware CTS(C lock Tree Synthesis) and Delay tables ###
+### Key Aspects of Power-Aware CTS
+1. **Dynamic Power Reduction**:
+   - Optimize clock buffers and wiring to reduce capacitive load.
+   - Use clock gating techniques to disable unused portions of the clock tree.
 
+2. **Leakage Power Reduction**:
+   - Use low-leakage cells for buffers and inverters in the clock tree.
+   - Adjust threshold voltages to balance power and performance.
+
+3. **Skew and Latency Management**:
+   - Ensure minimal clock skew across endpoints.
+   - Maintain acceptable latency while optimizing for power.
+
+4. **Multi-Corner Multi-Mode (MCMM) Optimization**:
+   - Account for process, voltage, and temperature (PVT) variations.
+   - Optimize across different operating modes and corners.
+
+## Delay Tables in VLSI
+**Delay Tables** provide timing information for standard cells under various conditions of load and input transition. They are essential for accurate timing analysis and optimization during the design process.
+
+### Components of Delay Tables
+1. **Input Transition**:
+   - Specifies the slew rate or transition time of the input signal.
+
+2. **Output Load**:
+   - Represents the capacitive load at the output of the cell.
+
+3. **Delay Values**:
+   - Time taken for the output to transition after a change at the input.
+
+4. **Data Organization**:
+   - Typically organized as a two-dimensional table where rows correspond to input transitions and columns correspond to output loads.
+
+### Example Delay Table
+| Input Transition (ps) | Output Load 1 (pF) | Output Load 2 (pF) | Output Load 3 (pF) |
+|------------------------|--------------------|--------------------|--------------------|
+| 50                    | 100                | 150                | 200                |
+| 100                   | 120                | 170                | 230                |
+| 200                   | 150                | 220                | 300                |
+
+### Importance of Delay Tables
+- Used in **Static Timing Analysis (STA)** to evaluate setup and hold times.
+- Help tools like **PrimeTime** or **Tempus** perform accurate delay calculations.
+- Aid in cell characterization and library generation
 
 ![WhatsApp Image 2024-12-23 at 08 39 07_aaa04b85](https://github.com/user-attachments/assets/49550ec7-90d0-46a4-947b-5bb5b9b3d474)
 
+__Setup timing analysis with single clock__
 
+**Setup Timing Analysis** is a crucial part of Static Timing Analysis (STA) in VLSI design, ensuring that data signals arrive at their destination registers at the correct time to avoid setup violations.
+
+The primary goal of setup timing analysis is to check that the data is stable and valid at the input of a flip-flop or latch, **before the clock edge**. If data changes too close to the clock edge (violating the setup time requirement), it may result in incorrect behavior due to unreliable capture of the data.
+
+### Key Concepts in Setup Timing Analysis
+
+1. **Setup Time**:
+   - **Setup time** is the minimum time interval before the clock edge that the data input to a flip-flop must remain stable (i.e., not change) to ensure reliable data capture on the rising or falling clock edge.
+
+2. **Setup Path**:
+   - The **setup path** is the critical path from the source of the data to the input of the flip-flop. The time it takes for the data to propagate through logic gates, interconnects, and arrive at the flip-flop input is called the **data arrival time**.
+
+3. **Clock Arrival Time**:
+   - The time at which the clock signal arrives at the flip-flop. The clock arrival time depends on the clock tree and the delay in the clock network.
+
+4. **Slack**:
+   - The **setup slack** is the difference between the **data arrival time** and the **clock arrival time** minus the **setup time**. It is defined as:
+     ```
+     Slack_setup = Clock Arrival Time - Data Arrival Time - Setup Time
+     ```
+   - A **positive slack** indicates that the data will arrive early enough for reliable capture, while **negative slack** indicates a setup violation (data arrives too late).
+
+5. **Setup Violation**:
+   - A **setup violation** occurs when the **setup slack** is negative. This means that the data has not arrived in time for the flip-flop to reliably capture the correct value on the clock edge, leading to potential functional errors.
+
+### Example of Setup Timing Violation
+
+Suppose a flip-flop has a **setup time** of 1ns, and the data arrives at the input 2ns before the clock edge, while the clock arrives 5ns after the data input.
+
+- **Data Arrival Time** = 0ns
+- **Clock Arrival Time** = 5ns
+- **Setup Time** = 1ns
+
+The **setup slack** is:
+
+Slack_setup = 5 - 0 - 1 = 4 ns
+
+Since the slack is positive, the setup timing is satisfied.
+
+If the clock arrives 4ns after the data, the **setup slack** would be:
+
+Slack_setup = 4 - 0 - 1 = 3 ns
+
+The setup condition would still be met.
+
+However, if the clock arrival time were only 1ns after the data, the **setup slack** would be:
+
+Slack_setup = 1 - 0 - 1 = -1 ns
+
+In this case, there would be a **setup violation**.
