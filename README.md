@@ -1182,4 +1182,156 @@ By employing careful design practices and cross-talk/skew-aware analysis, these 
 Topics covered
 <details>
            
+-__Routing and DEsign rule check__
+-__Maze routing and Lee's algorithm__
+-__Power distribution netwrk and routing__
+-__Global and detailed routing__
+     
 </details>
+
+### Routing ###
+
+Routing connects the components (e.g., standard cells, macros) in a design by creating physical paths for signals on metal layers. It involves two steps: global routing, which defines approximate paths, and detailed routing, which specifies exact wire placement while avoiding overlaps and design rule violations. Routing must ensure signal integrity, minimize delay, and optimize power consumption. Challenges include congestion, cross-talk, and ensuring timing closure. Advanced algorithms and tools handle multi-layer routing in modern designs with billions of transistors.
+
+
+ __Types of Routing in VLSI__
+
+```mermaid
+flowchart TD
+    A[Routing in VLSI] --> B[Global Routing]
+    A --> C[Detailed Routing]
+```
+![WhatsApp Image 2024-12-23 at 09 14 20_d9746269](https://github.com/user-attachments/assets/e6b52e2f-1c0c-4b82-8fe5-e77b77ae716e)
+
+__Maze routing - Lees' Algorithm__
+
+ __Key Components in the Image__
+1. **Routing Grid**:
+   - The grid represents the chip layout for routing. Each small square is a "cell" in the grid, which can be occupied, free, or blocked.
+
+2. **Source and Destination**:
+   - The **blue square** marks the **source pin**.
+   - The **red path** shows the shortest path to the **destination pin**.
+
+3. **Obstacles**:
+   - Blocks labeled **DECAP1**, **Block A**, **Block B**, and **DECAP2** represent regions where routing is **not allowed** (e.g., occupied cells or design constraints).
+
+4. **Propagation Numbers**:
+   - The numbers in the grid represent **distance values** during wave propagation. They indicate the number of steps from the source.
+
+5. **Path Backtracking**:
+   - The **red path** is obtained by backtracking from the destination to the source using decreasing distance values.
+
+---
+
+__Explanation of the Routing Process__
+1. **Initialization**:
+   - The source pin (blue square) is the starting point.
+   - Obstacles are marked as **unavailable** cells.
+
+2. **Wave Propagation**:
+   - Starting from the source, the wave propagates outward, assigning a numerical value to each cell based on the distance from the source.
+   - Propagation stops when the wave reaches the destination pin or exhausts the grid.
+
+3. **Obstacle Avoidance**:
+   - Cells corresponding to obstacles (e.g., "Block A" or "DECAP2") are skipped during propagation.
+
+4. **Path Backtracking**:
+   - After reaching the destination pin, the algorithm traces back through cells with decreasing distance values to determine the shortest path.
+
+5. **Final Path**:
+   - The red path shown in the grid is the result of this backtracking process.
+
+---
+
+__Observations__
+- The algorithm successfully routes around obstacles to connect the source and destination.
+- The propagation numbers demonstrate the systematic approach to finding the shortest Manhattan path.
+- This guarantees a feasible routing solution if a path exists.
+
+---
+
+ __Application in VLSI__
+- **Detailed Routing**:
+  - Used to connect pins in congested chip areas while avoiding obstacles and adhering to design rules.
+- **Advantages**:
+  - Guarantees the shortest path.
+  - Reliable for routing in complex layouts.
+
+---
+
+![WhatsApp Image 2024-12-23 at 09 14 22_2c54de3a](https://github.com/user-attachments/assets/6f2c242f-f268-4220-99fe-a73ffb6ee340)
+
+### DRC(DESIGN RULE CHECK) ###
+Design Rule Check (DRC) ensures a circuit layout meets manufacturing constraints to avoid defects and ensure fabricability.
+
+Here are three typical DRC checks:
+
+-Wire Width Check: Ensures wire traces are wide enough to prevent issues like increased resistance or wire breakage. (e.g., minimum width of 0.5 microns).
+
+-Wire Pitch Check: Ensures adequate spacing between adjacent wires to prevent short circuits or crosstalk. (e.g., minimum spacing of 0.2 microns).
+
+-Wire Spacing Check: Ensures the center-to-center distance between wires meets the minimum required for manufacturability and proper layer alignment. (e.g., minimum pitch of 0.6 microns).
+
+![WhatsApp Image 2024-12-23 at 09 14 25_551b68c4](https://github.com/user-attachments/assets/e7290d5d-cd29-4cdb-9cc0-548f5150dfc3)
+
+__DRC violation in signal short__
+
+A Signal Short DRC violation occurs when two or more signal lines or nets that should not be electrically connected come into contact with each other. 
+
+![WhatsApp Image 2024-12-23 at 09 14 26_d851dd24](https://github.com/user-attachments/assets/faf4b5fe-0d83-4c94-97ec-a0435fe35c3e)
+
+Two Additional DRC Rules to Check
+
+-__Via Width Check (Minimum Via Width):__
+
+__Definition:__ This rule ensures that the vias used to connect different metal layers in the design have a sufficient width to handle the required current and maintain structural integrity during manufacturing.
+
+__Importance:__ If vias are too narrow, they might not be able to carry the required current, leading to overheating or even failure of the via. Additionally, narrow vias can be difficult to manufacture, leading to defects during fabrication.
+__Example DRC Rule:__ Minimum via width could be defined as 0.3 microns. Any via narrower than this would violate the design rules.
+
+![WhatsApp Image 2024-12-23 at 09 14 27_2922d036](https://github.com/user-attachments/assets/5f1705e9-5cb8-4e7b-8ca1-8a544af9157f)
+
+-__Via Spacing Check (Minimum Via Spacing):__
+
+__Definition:__ This rule checks that there is enough distance between the centers of adjacent vias to avoid potential short circuits or interference between vias.
+
+__Importance:__ If vias are placed too close to each other, they could unintentionally connect, causing shorts between layers or making the design difficult to manufacture. It could also create difficulties in the etching process, leading to faulty vias.
+
+__Example DRC Rule:__ Minimum via spacing could be 0.5 microns. Any vias closer than this would be flagged as a violation.
+
+![WhatsApp Image 2024-12-23 at 09 14 25_6aada07c](https://github.com/user-attachments/assets/1130e36d-3044-47e2-a5ea-63eb3f5555cb)
+
+### Triton route ###
+
+TritonRoute is an advanced router used in integrated circuit (IC) design, specifically for place-and-route (P&R) tasks in semiconductor chip design. It is an open-source routing tool developed primarily for digital ICs and is used to automatically create the routing (metal interconnects) between the pre-placed components (such as transistors, logic gates, and cells) in a chip layout.
+
+![WhatsApp Image 2024-12-23 at 09 14 27_7734fa54](https://github.com/user-attachments/assets/ad47b607-6650-4595-8d18-feb14e3fc1de)
+
+__What are Preprocessor route guides ?__
+
+Preprocessor Route Guides are a set of predefined guidelines or paths used during the routing process in IC (Integrated Circuit) design to influence and optimize the routing of signals between various components on the chip. These guides help to direct the router tool (like TritonRoute) in a way that can improve the routing process by reducing congestion, ensuring efficient use of routing resources, and adhering to design rules.
+
+-Avoiding Congestion: Steering routes away from crowded areas.
+-Optimizing Wire Length: Reducing signal path lengths for better performance.
+-Ensuring Design Rule Compliance: Following spacing, width, and layer requirements.
+-Simplifying Routing: Making complex routing tasks faster and easier.
+
+![WhatsApp Image 2024-12-23 at 09 14 28_f9605cad](https://github.com/user-attachments/assets/6759142a-cc56-4979-805e-05fd26c21479)
+
+__Intralayer parallel and Interlayer sequential panel routing__
+
+### Intralayer Parallel Routing
+- Routes multiple signals in parallel within a single metal layer.
+- Requires careful spacing to avoid crosstalk or shorts.
+
+### Interlayer Sequential Routing
+- Routes signals across multiple metal layers using vias.
+- Provides more flexibility but increases complexity.
+
+Both methods optimize IC layout for space and performance.
+
+![WhatsApp Image 2024-12-23 at 09 14 29_1a54ce28](https://github.com/user-attachments/assets/fcd54ba1-d661-441f-9294-929cefffddd9)
+
+
+
