@@ -1078,3 +1078,108 @@ However, if the clock arrival time were only 1ns after the data, the **setup sla
 Slack_setup = 1 - 0 - 1 = -1 ns
 
 In this case, there would be a **setup violation**.
+
+![WhatsApp Image 2024-12-23 at 08 39 06_d48102c9](https://github.com/user-attachments/assets/7e4f7daf-4e92-40f5-975f-b52c1ba248b6)
+
+### Glitch ###
+
+A glitch is an unwanted transient signal or pulse that appears temporarily in a digital circuit. These occur due to differences in signal propagation delays through various paths in a logic circuit. Glitches are often referred to as "hazards" and can lead to functional or timing-related errors in a digital design.
+
+![WhatsApp Image 2024-12-23 at 08 39 07_45e19045](https://github.com/user-attachments/assets/12d12288-faf3-4d37-8282-69a7a15b8623)
+
+__Effects of Glitches__
+
+1. **Functional Errors**:
+   - Glitches can cause incorrect values to propagate through the circuit, leading to errors in computation or operation.
+
+2. **Power Dissipation**:
+   - Every glitch causes unnecessary switching activity, which increases dynamic power consumption in the circuit.
+
+3. **Timing Violations**:
+   - If glitches propagate to clocked elements, they may cause setup or hold violations, resulting in unpredictable behavior.
+  
+__Cross-Talk Delta delay-Skew__
+
+## 1. Cross-Talk
+Cross-talk is the unwanted electromagnetic coupling between adjacent signal wires in a VLSI circuit. It occurs when the signal in one wire (the **aggressor**) induces noise or interference in a nearby wire (the **victim**).
+
+### Causes of Cross-Talk
+- **Capacitive Coupling**: Charge transfer between adjacent wires due to their parasitic capacitance.
+- **Inductive Coupling**: Induced currents due to changing magnetic fields in adjacent wires.
+
+### Effects of Cross-Talk
+- **Noise**: Unintended signal glitches on the victim wire.
+- **Delta Delay**: Changes in signal propagation time due to interference (explained below).
+- **Signal Integrity Issues**: Potential functional failures if noise exceeds threshold levels.
+
+### Mitigation Techniques
+- Increase spacing between wires.
+- Use shielding layers or guard rings.
+- Optimize routing to minimize coupling capacitance.
+
+---
+
+## 2. Delta Delay
+Delta delay refers to the change in signal propagation delay caused by cross-talk effects. It can either speed up or slow down a signal depending on the relative switching behavior of the aggressor and victim wires.
+
+### Types of Delta Delay
+1. **Positive Delta Delay**:
+   - Occurs when the aggressor and victim signals switch in the **same direction**.
+   - Results in a **reduction** in propagation delay (signal arrives earlier than expected).
+
+2. **Negative Delta Delay**:
+   - Occurs when the aggressor and victim signals switch in **opposite directions**.
+   - Results in an **increase** in propagation delay (signal arrives later than expected).
+
+### Implications of Delta Delay
+- Can cause **timing violations**, such as setup or hold failures.
+- Affects critical paths and degrades overall circuit performance.
+
+### Mitigation Techniques
+- Reduce coupling capacitance by increasing spacing.
+- Perform **cross-talk aware timing analysis** during design.
+- Use buffers or repeaters to isolate aggressor and victim signals.
+
+---
+
+## 3. Skew
+Skew is the difference in arrival times of the clock or signal edges at different points in a circuit.
+
+### Types of Skew
+1. **Clock Skew**:
+   - Difference in arrival times of the clock signal at different clocked elements (e.g., flip-flops).
+   - **Positive Skew**: Clock arrives earlier at the source flip-flop than the destination flip-flop.
+   - **Negative Skew**: Clock arrives later at the source flip-flop than the destination flip-flop.
+
+2. **Data Skew**:
+   - Variation in arrival times of data signals due to path differences or cross-talk effects.
+
+### Implications of Skew
+- **Clock Skew**:
+  - Can cause **setup violations** (negative skew) or **hold violations** (positive skew).
+  - Affects synchronous design performance and timing closure.
+- **Data Skew**:
+  - Leads to mismatched data arrival at logic inputs, causing functional errors.
+
+### Mitigation Techniques
+- Use balanced clock trees to minimize clock skew (e.g., H-tree or mesh topology).
+- Equalize data path delays using delay buffers.
+- Perform **skew-aware timing analysis** during physical design.
+
+---
+
+## Conclusion
+- **Cross-talk** introduces noise and affects signal integrity.
+- **Delta delay** results from cross-talk and alters signal propagation times.
+- **Skew** impacts timing synchronization and circuit functionality.
+By employing careful design practices and cross-talk/skew-aware analysis, these issues can be effectively mitigated in VLSI circuits.
+
+![WhatsApp Image 2024-12-23 at 08 39 07_163d6ac3](https://github.com/user-attachments/assets/98d0de3d-8644-45ba-a3ad-19ed45c777d2)
+
+![WhatsApp Image 2024-12-23 at 08 39 07_b777cea6](https://github.com/user-attachments/assets/2caf9f43-9e7d-40b4-94b8-a2632fa85d4a)
+
+## DAY 5 ##
+Topics covered
+<details>
+           
+</details>
