@@ -858,7 +858,7 @@ magic -T sky130A.tech sky130_inv.mag &
   magic -T sky130A.tech sky130_vsdinv.mag &
   ```
 
- <img width="960" alt="after saving changed grid of the  inverter in vsdstd" src="https://github.com/user-attachments/assets/b185f470-b855-4614-8be6-6554c6dd3f4b" /
+ <img width="960" alt="after saving changed grid of the  inverter in vsdstd" src="https://github.com/user-attachments/assets/b185f470-b855-4614-8be6-6554c6dd3f4b" />
 
  - Extracting lef file for the inverter
 
